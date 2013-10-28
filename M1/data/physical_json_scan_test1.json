@@ -1,0 +1,39 @@
+{
+  head:
+    {
+      type: "APACHE_DRILL_PHYSICAL",
+      version: 1,
+      generator:
+        {
+          type: "manual"
+        }
+    },
+  graph:
+    [
+      {
+        @id: 1,
+        pop: "json-scan",
+        entries: 
+          [
+            {
+              path: "./sample-data/donuts.json"
+            }
+          ],
+        storageengine: 
+          {
+            "type": "json",
+            "dfsName": "file:///"
+          }
+      },
+      {
+        @id: 2,
+        child: 1,
+        pop: "union-exchange"
+      },
+      {
+        @id: 3,
+        child: 2,
+        pop: "screen"
+      }
+    ]
+}

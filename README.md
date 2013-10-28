@@ -1,4 +1,3 @@
-apache-drill-sandbox
-====================
+# Apache Drill sandbox
 
-A collection of experiments and recipes around Apache Drill
+A collection of experiments and recipes around Apache Drill.
