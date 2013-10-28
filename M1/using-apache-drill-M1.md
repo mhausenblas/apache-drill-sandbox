@@ -27,7 +27,7 @@ So, to achieve this, do the following to install and set up ZK:
 
 * Download ZK from [zookeeper.apache.org/releases.html](http://zookeeper.apache.org/releases.html) in the version 3.4.3
 * I assume in the following that $ZK_HOME is `/Users/mhausenblas2/bin/zookeeper-3.4.3`
-* Create a config file `conf/apache-drill-zoo.cfg` that holds the Apache Drill specific settings. You find the content in the conf directory of this repo.
+* Create a config file `conf/apache-drill-zoo.cfg` that holds the Apache Drill specific settings. You can find the of this [ZK config file](https://raw.github.com/mhausenblas/apache-drill-sandbox/master/M1/conf/apache-drill-zoo.cfg) content in the `conf/` directory of this repo.
 
 Then, launch ZK as shown below:
 
@@ -90,15 +90,16 @@ OK, we have `numChildren = 3` so looking good.
 
 ### Submit a physical query plan
 
-Make sure the data is available. For each `apache-drill-1.0.0-m1-cluster/apache-drill-1.0.0-m1-nodeX` you'd have `sample-data/donuts.json` ready via:
+Make sure the data is available. For each `apache-drill-1.0.0-m1-cluster/apache-drill-1.0.0-m1-nodeX` you'd have the following data files via `sample-data/` available:
 
-    $ curl https://raw.github.com/apache/incubator-drill/master/exec/ref/src/test/resources/donuts.json > donuts.json 
+* [`donuts.json`](https://raw.github.com/mhausenblas/apache-drill-sandbox/master/M1/data/donuts.json)
+* `nation.parquet` and `region.parquet` are already shipped with M1
 
-Also we need the physical query plan (in at least one of the `nodeX`):
+Also we need the physical query plan (in at least one of the `nodeX/sample-data/`):
 
-    $ pwd
-    /Users/mhausenblas2/sandbox/apache-drill-1.0.0-m1-cluster/apache-drill-1.0.0-m1-node1/sample-data
-    $ curl https://raw.github.com/apache/incubator-drill/master/exec/java-exec/src/test/resources/physical_json_scan_test1.json > physical_json_scan_test1.json
+* [`physical_json_scan_test1.json`](https://raw.github.com/mhausenblas/apache-drill-sandbox/master/M1/data/physical_json_scan_test1.json)
+* [`parquet_scan_union_screen_physical.json`](https://raw.github.com/mhausenblas/apache-drill-sandbox/master/M1/data/parquet_scan_union_screen_physical.json)
+
 
 And then submit the plan from one of the nodes (`node1` in my case):
 
@@ -106,11 +107,11 @@ And then submit the plan from one of the nodes (`node1` in my case):
     /Users/mhausenblas2/sandbox/apache-drill-1.0.0-m1-cluster/apache-drill-1.0.0-m1-node1
   
 
-Test 1: Scan JSON doc
+#### Scan JSON doc
 
     $ bin/submit_plan -f sample-data/physical_json_scan_test1.json -t physical -zk 127.0.0.1:2181
 
-Test 2: Scan Parquet doc
+#### Scan Parquet doc
 
     $ bin/submit_plan -f sample-data/parquet_scan_union_screen_physical.json -t physical -zk 127.0.0.1:2181
 
