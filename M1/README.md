@@ -27,7 +27,7 @@ So, to achieve this, do the following to install and set up ZK:
 
 * Download ZK from [zookeeper.apache.org/releases.html](http://zookeeper.apache.org/releases.html) in the version 3.4.3
 * I assume in the following that $ZK_HOME is `/Users/mhausenblas2/bin/zookeeper-3.4.3`
-* Create a config file `conf/apache-drill-zoo.cfg` that holds the Apache Drill specific settings. You can find the of this [ZK config file](https://raw.github.com/mhausenblas/apache-drill-sandbox/master/M1/conf/apache-drill-zoo.cfg) content in the `conf/` directory of this repo.
+* Create a config file `conf/apache-drill-zoo.cfg` that holds the Apache Drill specific settings. You can find the of this [ZK config file](https://raw.github.com/mhausenblas/apache-drill-sandbox/master/M1/conf/apache-drill-zoo.cfg) content in the `conf/` directory of this repo. You'll need to adapt one line and this is: `dataDir=/Users/mhausenblas2/data/zk` which you change to any directory you want to, as long as you have write access there.
 
 Then, launch ZK as shown below:
 
@@ -134,14 +134,14 @@ Make sure the following env vars are set:
     $ export DRILL_LOG_DIR=$PWD/log
     $ ./bin/drillbit.sh start
 
+Now you're ready to launch the interactive SQL query CLI:
+
     $ ./bin/sqlline -u jdbc:drill:schema=parquet-local
 
     0: jdbc:drill:schema=parquet-local>
     SELECT _MAP['R_REGIONKEY'] as region_key, _MAP['R_NAME'] AS name, _MAP['R_COMMENT'] AS comment FROM "sample-data/region.parquet";
     SELECT count(distinct _MAP['N_REGIONKEY']) FROM "sample-data/nation.parquet";	
     SELECT _MAP['N_REGIONKEY'] as regionKey, _MAP['N_NAME'] as name FROM "sample-data/nation.parquet" WHERE cast(_MAP['N_NAME'] as varchar) < 'M';
-
-    $ ./bin/sqlline -u jdbc:drill:schema=json
 
 
 More queries at on the [Wiki](https://cwiki.apache.org/confluence/display/DRILL/Demo+HowTo).
