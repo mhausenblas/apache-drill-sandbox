@@ -2,10 +2,10 @@
 
 Contents:
 
-* Preparation
-* Running Apache Drill in distributed mode
-* Interactive query on single node with sqlline
-* Behind the scenes of the Command Line Interface (CLI)
+* [Preparation](#preparation)
+* [Running Apache Drill in distributed mode](#running-apache-drill-in-distributed-mode)
+* [Interactive query on single node with sqlline](#interactive-query-on-single-node-with-sqlline)
+* [Behind the scenes of the Command Line Interface (CLI)](#behind-the-scenes-of-the-command-line-interface-cli)
 
 ## Preparation
 
