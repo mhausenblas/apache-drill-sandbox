@@ -1,5 +1,12 @@
 # Using Apache Drill M1 
 
+Contents:
+
+* Preparation
+* Running Apache Drill in distributed mode
+* Interactive query on single node with sqlline
+* Behind the scenes of the Command Line Interface (CLI)
+
 ## Preparation
 
 (OPTIONAL) Download and install the [Lilith](http://lilithapp.com/) logging and access event viewer.
@@ -145,3 +152,21 @@ Now you're ready to launch the interactive SQL query CLI:
 
 
 More queries at on the [Wiki](https://cwiki.apache.org/confluence/display/DRILL/Demo+HowTo).
+
+## Behind the scenes of the Command Line Interface (CLI)
+
+The CLI of the M1 release essentially comprises three end-user facing shell scripts:
+
+* `bin/drillbit.sh` … the Drillbit (launches the worker task on a node)
+* `bin/sqlline` … the interactive SQL interface (for single-node usage)
+* `bin/submit_plan` … the interface to submit phyiscal plans (for cluster usage)
+
+For a more complete overview of the call dependencies in the CLI, consult the
+following figure:
+
+![CLI dependencies](https://raw.github.com/mhausenblas/apache-drill-sandbox/master/M1/M1-CLI-dep.png "CLI dependencies")
+
+
+If you're not familiar with the basics of Apache Drill, you might find the 
+article [Apache Drill: Interactive Ad-Hoc Analysis at Scale](http://online.liebertpub.com/doi/pdfplus/10.1089/big.2013.0011)
+useful.
